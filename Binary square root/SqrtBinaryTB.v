@@ -2,13 +2,12 @@
 //Sepehr Razmyar 2020
 module SqrtBinaryTB (
   );
-  parameter SIZE      = 8'd64, // must be even
-            HALF_SIZE = 8'd32;
+  parameter SIZE      = 8'd16, // must be even
+            HALF_SIZE = 8'd8;
 
   reg  [SIZE - 1 : 0] p;
   wire [HALF_SIZE - 1 : 0] u;
   integer fd;
-
 
   SqrtBinary #(.SIZE(SIZE), .HALF_SIZE(HALF_SIZE)) unit (
             .p(p),
@@ -17,11 +16,10 @@ module SqrtBinaryTB (
 
 
   initial begin
-    fd =  $fopen("SqrtBinary_output.txt", "w");
+    fd = $fopen("D:/Edu/Computer Scinece and Engineering/CAD/Binary Square root/Modified-Non-Restoring-Square-Root/TestBench Outputs/SqrtBinaryTB.txt", "w");
     p = 0;
     repeat(100) begin
-      p[31:0] = $random;
-      p[63:32] = $random;
+      p = $random;
 
       #100;
       $fwrite(fd, "%b %b\n%d %d\n", p, u, p, u);
